@@ -5,18 +5,21 @@ namespace MvcMovie.Controllers
 {
     public class HelloWorldController : Controller
     {
-        //
+        //Default method when calling the page
         //Get: /HelloWorld/
-        public string Index()
+        public IActionResult Index()
         {
-            return "This is my default action...";
+            return View();
         }
 
         //
         //Get: /HelloWorld/Welcome/
-        public string Welcome(string name = "redacted", int numTimes = 1)
+        public IActionResult Welcome(string name, int numTimes = 1)
         {
-            return HtmlEncoder.Default.Encode($"Hola {name}, el valor de NumTimes es: {numTimes}");
+            ViewData["Message"] = "Hello " + name;
+            ViewData["NumTimes"] = numTimes;
+
+            return View();
         }
     }
 }
